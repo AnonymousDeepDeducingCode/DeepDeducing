@@ -1,5 +1,5 @@
 # DeepDeducing
-This page contains the basic Deep Deducing code for its application in Game Theory.
+This page contains the basic Deep Deducing code for demonstration of its functionality.
 
 # Content
 Please run the codes started with "Run" 
