@@ -5,6 +5,7 @@ This page contains the basic Deep Deducing code for its application in Game Theo
 Please run the codes started with "Run" 
 
 For Experiment I:
+
       Run_test_1
       Run_test_1_fixed_A
       Run_test_1_smoothing_for_B
@@ -16,6 +17,7 @@ For Experiment I:
       Run_test_2_8x8
 
 For Experiment II:
+
       Run_Tic_Tac_Toe
 
 # Others
