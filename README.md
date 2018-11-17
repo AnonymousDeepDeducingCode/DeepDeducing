@@ -6,7 +6,7 @@ Please run the codes started with "Run"
 
 ## For Experiment I:
 
-### For test 1:
+ ### test 1:
 
       Run_test_1
       Run_test_1_fixed_A
@@ -14,7 +14,7 @@ Please run the codes started with "Run"
       Run_test_1_NE_trajectory_for_A
       Run_test_1_NE_trajectory_for_B
 
-### For test 2:
+ ### test 2:
 
       Run_test_2_2x2_4x4
       Run_test_2_4x4
