@@ -1,8 +1,9 @@
 # DeepDeducing
 This page contains the basic Deep Deducing code for demonstration of its functionality.
+Please run the codes started with "Run" .
 
 # Content
-Please run the codes started with "Run" 
+
 
 ## For Experiment I:
 
