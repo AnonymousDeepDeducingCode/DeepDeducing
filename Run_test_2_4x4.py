@@ -488,7 +488,7 @@ for i in range(optimal_trials):
 
     dims[-1]                      = strategy_list.shape[1]
 
-    Machine                       = Basic_Research_Model(dims, alpha, initial_epochs, beta, rounds,rounds_inside_swarm, rounds_inside_swarm, signal_receiver, signal_transfer, function)
+    Machine                       = Basic_Research_Model(dims, alpha, initial_epochs, beta, rounds, rounds_inside_swarm, signal_receiver, signal_transfer, function)
 
     Machine.fit(input_list, strategy_list)
 
