@@ -21,12 +21,10 @@ Please run the codes started with "Run" .
  ### test 2:
 
       Figure 9         ---- Run_test_2_2x2_4x4
-      Figure 10        ---- Run_test_2_4x4
-      Figure 11        ---- Run_test_2_8x8
 
 ## For Experiment II:
 
-      Figure 15        ---- Run_Tic_Tac_Toe
+      Figure 13        ---- Run_Tic_Tac_Toe
 
 # Others
 The codes are anonymous as well.
