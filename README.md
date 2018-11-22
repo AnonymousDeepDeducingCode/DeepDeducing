@@ -26,5 +26,9 @@ Please run the codes started with "Run" .
 
       Figure 13        ---- Run_Tic_Tac_Toe
 
+## For Experiment III:
+
+      Figure 16        ---- Run_Crow_Reasoning
+
 # Others
 The codes are anonymous as well.
