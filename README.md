@@ -28,7 +28,8 @@ Please run the codes started with "Run" .
 
 ## For Experiment III:
 
-      Figure 16        ---- Run_Crow_Reasoning
+      Figure 16        ---- 1. Run_Crow_Reasoning_generating_synapse
+                       ---- 2. Run_Crow_Reasoning
 
 # Others
 The codes are anonymous as well.
