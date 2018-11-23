@@ -3,7 +3,7 @@ This page contains the basic Deep Deducing code for demonstration of its functio
 
 The code corresponding to each figure is listed below.
 
-Please run the codes started with "Run" .
+Please run the codes started with "Run", while other codes starting with "Basic_Research_Model" or "Game_Net" are just internal parts of the machine. We assume the readers are able to make the connection between the user surface and the internal parts of the machine.
 
 # Content
 
