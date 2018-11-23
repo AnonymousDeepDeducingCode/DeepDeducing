@@ -12,24 +12,24 @@ Please run the codes started with "Run", while other codes starting with "Basic_
 
  ### test 1:
 
-      Figure 6 (left)  ---- Run_test_1
-      Figure 6 (right) ---- Run_test_1_fixed_A
-      Figure 7         ---- Run_test_1_smoothing_for_B
-      Figure 8 (left)  ---- Run_test_1_NE_trajectory_for_A
-      Figure 8 (right) ---- Run_test_1_NE_trajectory_for_B
+      Figure 6 (left)  ---- Run_test_1                                --- Basic_Research_Model_for_test_1
+      Figure 6 (right) ---- Run_test_1_fixed_A                        --- Basic_Research_Model_for_test_1_fixed_A
+      Figure 7         ---- Run_test_1_smoothing_for_B                --- Basic_Research_Model_for_test_1_smoothing_for_B
+      Figure 8 (left)  ---- Run_test_1_NE_trajectory_for_A            --- Basic_Research_Model_for_test_1_NE_trajectory_for_A
+      Figure 8 (right) ---- Run_test_1_NE_trajectory_for_B            --- Basic_Research_Model_for_test_1_NE_trajectory_for_B
 
  ### test 2:
 
-      Figure 9         ---- Run_test_2_2x2_4x4
+      Figure 9         ---- Run_test_2_2x2_4x4                        --- Basic_Research_Model_for_test_2
 
 ## For Experiment II:
 
-      Figure 13        ---- Run_Tic_Tac_Toe
+      Figure 13        ---- Run_Tic_Tac_Toe                           --- Game_Net_Tic_Tac_Toe
 
 ## For Experiment III:
 
-      Figure 16        ---- 1. Run_Crow_Reasoning_generating_synapse
-                       ---- 2. Run_Crow_Reasoning
+      Figure 16        ---- 1. Run_Crow_Reasoning_generating_synapse  --- Game_Net_Crown_Reasoning
+                       ---- 2. Run_Crow_Reasoning                     --- Game_Net_Crown_Reasoning
 
 # Others
 The codes are anonymous as well. Please feel free to have fun.
