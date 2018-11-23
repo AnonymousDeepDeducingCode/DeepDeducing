@@ -30,17 +30,17 @@ Machine.synapse_layer_2_to_layer_3         = np.genfromtxt('self.synapse_layer_2
 
 def examine(array):
 
-    threshold = 0.7
+    threshold = 0.5
 
-    if (array[0] > threshold)&(array[1] > threshold):
+    if (array[0] > threshold)&(array[1] > threshold) & ((np.argmax(array) == 0) | (np.argmax(array) == 1)):
         return "left"
-    if (array[2] > threshold)&(array[3] > threshold):
+    if (array[2] > threshold)&(array[3] > threshold) & ((np.argmax(array) == 2) | (np.argmax(array) == 3)):
         return "top"
-    if (array[4] > threshold)&(array[5] > threshold):
+    if (array[4] > threshold)&(array[5] > threshold) & ((np.argmax(array) == 4) | (np.argmax(array) == 5)):
         return "right"
-    if (array[6] > threshold)&(array[7] > threshold):
+    if (array[6] > threshold)&(array[7] > threshold) & ((np.argmax(array) == 6) | (np.argmax(array) == 7)):
         return "bottom"
-    if (array[8] > threshold)&(array[9] > threshold):
+    if (array[8] > threshold)&(array[9] > threshold) & ((np.argmax(array) == 8) | (np.argmax(array) == 9)):
         return "still"
     else:
         return "still"
