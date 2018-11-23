@@ -381,8 +381,8 @@ class Game_Net_Problem_Solving(object):
 
                 for j in range(10):
 
-                    saved_leader          = self.leader
-                    saved_particle        = self.particle
+                    saved_leader          = copy.deepcopy(self.leader)
+                    saved_particle        = copy.deepcopy(self.particle)
 
                     # MOVING FORWARD ------------------------------------------------------------------------
 
