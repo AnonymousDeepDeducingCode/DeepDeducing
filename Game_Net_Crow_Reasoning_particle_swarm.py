@@ -372,7 +372,7 @@ class Game_Net_Problem_Solving(object):
                 # SHOT DOWN THE LEADER AND MAKE COMPETITOR ----------------------------------------------------------------------------
 
                 self.leader      = self.selected_movements_inner[self.present_trainee]
-                self.particle    = (np.random.random(self.selected_movements_inner.shape[1]) - 0.5) * 5
+                self.particle    = (np.random.random(self.selected_movements_inner.shape[1]) - 0.5) * 0.5
 
                 self.momentum_leader   = np.zeros(self.selected_movements_inner.shape[1])
                 self.momentum_particle = np.zeros(self.selected_movements_inner.shape[1])
