@@ -1,6 +1,4 @@
-# DeepDeducing
-
-The codes are submitted to 33rd Conference on Neural Information Processing Systems (NeurIPS 2019). Do not distribute.
+# Suggestion
 
       Software Suggestion:
             Interpreter: Python 3.7
@@ -11,16 +9,17 @@ The codes are submitted to 33rd Conference on Neural Information Processing Syst
       
 # Content
 
+.py
 
+      Generate_Synapse.py---- Train the neural network and generate/save matrix weights (learning phase)
+      Run.py             ---- Load saved matrix weight and sovle Sudoku tables (deducing phase)
+      Brain.py           ---- Module to be imported in Generate_Synapse.py/Run.py. Might be slower than Brain_fast_6x6.py
+      Brain_fast_6x6.py  ---- Module to be used to train/solve Sudoku tables of size 6x6 for faster reproduction
 
-Run.py
+.npy
 
-      Figure 6 (left)  ---- Run_test_1                              --- Basic_Research_Model_for_test_1
-      Figure 6 (right) ---- Run_test_1_fixed_A                      --- Basic_Research_Model_for_test_1_fixed_A
-      Figure 7         ---- Run_test_1_smoothing_for_B              --- Basic_Research_Model_for_test_1_smoothing_for_B
-      Figure 8 (left)  ---- Run_test_1_NE_trajectory_for_A          --- Basic_Research_Model_for_test_1_NE_trajectory_for_A
-      Figure 8 (right) ---- Run_test_1_NE_trajectory_for_B          --- Basic_Research_Model_for_test_1_NE_trajectory_for_B
-
-
+      self.synapse_list_6x6_500x500x500_0.0001_25m_tilt_30_flexible----500x500x500 means the topology of the neural network, 25m means its been trained for 25 millions iteration, 
+      self.tilt_list_6x6_500x500x500_0.0001_25m_tilt_30_flexible   ----
+      
 # Others
 The codes are anonymous as well.
