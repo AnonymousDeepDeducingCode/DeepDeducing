@@ -18,8 +18,8 @@
 
 .npy
 
-      self.synapse_list_6x6_500x500x500_0.0001_25m_tilt_30_flexible----500x500x500 means the topology of the neural network, 25m means its been trained for 25 millions iteration, 
-      self.tilt_list_6x6_500x500x500_0.0001_25m_tilt_30_flexible   ----
+      self.synapse_list_6x6_500x500x500_0.0001_25m_tilt_30_flexible---- 500x500x500 means the topology of the neural network, 25m means its been trained for 25 million iterations, 0.001 means alpha, tilt_30_flexible means the slope of sigmoid function is set to be 30 and will be updated
+      self.tilt_list_6x6_500x500x500_0.0001_25m_tilt_30_flexible   ---- tilt_list means the tilt list for the sigmoid function in each layer of the neural network
       
 # Others
 The codes are anonymous as well.
