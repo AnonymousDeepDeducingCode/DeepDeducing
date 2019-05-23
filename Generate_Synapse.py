@@ -59,7 +59,7 @@ table_size  = 6                                                                 
 input_list  = list()
 output_list = list()
 
-for i in range(2000000):                                                                                            #<------------------------------------------------------1500000   200000 500000
+for i in range(2000000):                                                                                            #<------------------------------------------------------
     sodoku_array_one_hot       = generate_sodoku_array_one_hot(table_size)
     sodoku_array_one_hot_value = return_value(sodoku_array_one_hot, table_size)
     input_list.append(sodoku_array_one_hot)
@@ -94,8 +94,8 @@ retrain = False                                                                 
 
 if retrain == True:
 
-    Machine.synapse_list   = np.load("self.synapse_list_6x6_100x100x100_0.000001_400m_tilt_30.npy.npy")                #<------------------------------------------------------
-    Machine.tilt_1_list    = np.load("self.tilt_1_list_6x6_100x100x100_0.000001_400m_tilt_30.npy.npy")                #<------------------------------------------------------
+    Machine.synapse_list   = np.load("self.synapse_list_6x6_100x100x100_0.000001_400m_tilt_30.npy")                #<------------------------------------------------------
+    Machine.tilt_1_list    = np.load("self.tilt_1_list_6x6_100x100x100_0.000001_400m_tilt_30.npy")                #<------------------------------------------------------
 
 Machine.fit(input_list, output_list)
 
