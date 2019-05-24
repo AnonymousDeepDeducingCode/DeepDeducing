@@ -148,57 +148,57 @@ class Brain(object):
 
         if position == "row":
             layer_delta        = (layer_delta_list[-1].dot(self.synapse_list[0].T                                                            ) ) * np.array([self.activator_output_to_derivative(layer_list[0]                      ) * self.tilt_2_list[index, :].flatten()                 ])
-            tilt_2_delta       = (layer_delta_list[-1].dot(self.synapse_list[0].T                                                            ) ) * np.array( self.activator_output_to_derivative(layer_list[0]                      ) * self.sodoku_matrix_inner[index, :].flatten()          )
+            tilt_2_delta       = (layer_delta_list[-1].dot(self.synapse_list[0].T                                                            ) ) * np.array( self.activator_output_to_derivative(layer_list[0]                      ) * self.sudoku_matrix_inner[index, :].flatten()          )
 
         if position == "column":
             layer_delta        = (layer_delta_list[-1].dot(self.synapse_list[0].T                                                            ) ) * np.array([self.activator_output_to_derivative(layer_list[0]                      ) * self.tilt_2_list[:, index].flatten()                 ])
-            tilt_2_delta       = (layer_delta_list[-1].dot(self.synapse_list[0].T                                                            ) ) * np.array( self.activator_output_to_derivative(layer_list[0]                      ) * self.sodoku_matrix_inner[:, index].flatten()          )
+            tilt_2_delta       = (layer_delta_list[-1].dot(self.synapse_list[0].T                                                            ) ) * np.array( self.activator_output_to_derivative(layer_list[0]                      ) * self.sudoku_matrix_inner[:, index].flatten()          )
 
         layer_delta_list.append(layer_delta)
 
         if position == "row":
-            self.sodoku_matrix_inner[index, :] += (np.array(layer_delta_list[-1][0]) * self.beta          * self.sodoku_matrix_resistor[index, :].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
-            self.tilt_2_list[index, :]         += (np.array(tilt_2_delta)            * self.update_rate_2 * self.sodoku_matrix_resistor[index, :].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
+            self.sudoku_matrix_inner[index, :] += (np.array(layer_delta_list[-1][0]) * self.beta          * self.sudoku_matrix_resistor[index, :].flatten()   ).reshape((self.sudoku_size, self.sudoku_size))
+            self.tilt_2_list[index, :]         += (np.array(tilt_2_delta)            * self.update_rate_2 * self.sudoku_matrix_resistor[index, :].flatten()   ).reshape((self.sudoku_size, self.sudoku_size))
 
         if position == "column":
-            self.sodoku_matrix_inner[:, index] += (np.array(layer_delta_list[-1][0]) * self.beta          * self.sodoku_matrix_resistor[:, index].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
-            self.tilt_2_list[:, index]         += (np.array(tilt_2_delta)            * self.update_rate_2 * self.sodoku_matrix_resistor[:, index].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
+            self.sudoku_matrix_inner[:, index] += (np.array(layer_delta_list[-1][0]) * self.beta          * self.sudoku_matrix_resistor[:, index].flatten()   ).reshape((self.sudoku_size, self.sudoku_size))
+            self.tilt_2_list[:, index]         += (np.array(tilt_2_delta)            * self.update_rate_2 * self.sudoku_matrix_resistor[:, index].flatten()   ).reshape((self.sudoku_size, self.sudoku_size))
 
 
-    def deduce_from(self, sodoku_matrix_inner, tilt_2_list, sodoku_matrix_resistor, goal):
+    def deduce_from(self, sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor, goal):
 
-        self.sodoku_matrix_inner    = sodoku_matrix_inner
-        self.sodoku_size            = self.sodoku_matrix_inner.shape[0]
+        self.sudoku_matrix_inner    = sudoku_matrix_inner
+        self.sudoku_size            = self.sudoku_matrix_inner.shape[0]
         self.tilt_2_list            = tilt_2_list
-        self.sodoku_matrix_resistor = sodoku_matrix_resistor
+        self.sudoku_matrix_resistor = sudoku_matrix_resistor
 
         for i in range(self.rounds):
 
             layer_lists = list()
 
-            for j in range(self.sodoku_size * 2):
+            for j in range(self.sudoku_size * 2):
 
-                if j + 1 <= self.sodoku_size:
-                    layer_list  = self.generate_values_for_each_layer(self.activator(self.sodoku_matrix_inner[j, :].flatten()                    * self.tilt_2_list[j, :].flatten()                     ))
+                if j + 1 <= self.sudoku_size:
+                    layer_list  = self.generate_values_for_each_layer(self.activator(self.sudoku_matrix_inner[j, :].flatten()                    * self.tilt_2_list[j, :].flatten()                     ))
                     layer_lists.append(layer_list)
                 else:
-                    layer_list  = self.generate_values_for_each_layer(self.activator(self.sodoku_matrix_inner[:, j - self.sodoku_size].flatten() * self.tilt_2_list[:, j - self.sodoku_size].flatten()  ))
+                    layer_list  = self.generate_values_for_each_layer(self.activator(self.sudoku_matrix_inner[:, j - self.sudoku_size].flatten() * self.tilt_2_list[:, j - self.sudoku_size].flatten()  ))
                     layer_lists.append(layer_list)
 
 
-            for k in range(self.sodoku_size * 2):
+            for k in range(self.sudoku_size * 2):
 
-                if k + 1 <= self.sodoku_size:
+                if k + 1 <= self.sudoku_size:
                     self.train_for_input(layer_lists[k],
                                          k,
                                          "row",
                                          goal)
                 else:
                     self.train_for_input(layer_lists[k],
-                                         k - self.sodoku_size,
+                                         k - self.sudoku_size,
                                          "column",
                                          goal)
 
-        return self.sodoku_matrix_inner, self.tilt_2_list
+        return self.sudoku_matrix_inner, self.tilt_2_list
 
 
