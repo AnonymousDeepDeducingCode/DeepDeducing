@@ -15,7 +15,7 @@ def generate_sudoku_array_one_hot(table_size):
         if random_number != table_size:
             sudoku_matrix_one_hot[i][random_number] = 1
 
-    accept = True
+    accept = True                                                                           #<<<<<<<<<<<<<<<<<<<<<<<<<< Silent or not
     if np.count_nonzero(sudoku_matrix_one_hot == 1) < table_size:
         accept = False
         for i in range(sudoku_matrix_one_hot.shape[0]):
@@ -56,6 +56,12 @@ def return_value(sudoku_array_one_hot, table_size):
                     returned[0:1] = 1
                     return returned
 
+    #for k in range(sudoku_matrix_one_hot.shape[0]):
+    #    if np.amax(sudoku_array_one_hot[k]) == 0:
+    #        returned = np.zeros(table_size)
+    #        returned[0:1] = 1    #<<<<<<<<<<<<<<<<<<<<<<<<<< Strict or smooth
+    #        return returned
+
     returned          = np.ones(table_size)
     return returned
 
@@ -65,33 +71,44 @@ table_size  = 6                   #<<<<<<<<<<< This element refers to the size o
 input_list  = list()
 output_list = list()
 
-for i in range(2000000):           #<<<<<<<<< This numbers decides the size of the samples being selected
+for i in range(2000000):           #<<<<<<<<< This numbers decides the size of the samples being selected           2m (or 5m) for silent,  8m for strict and smooth
     sudoku_array_one_hot       = generate_sudoku_array_one_hot(table_size)
     sudoku_array_one_hot_value = return_value(sudoku_array_one_hot, table_size)
     input_list.append(sudoku_array_one_hot)
     output_list.append(sudoku_array_one_hot_value)
 
+
 #----------------------------------------------------------Importing Model -----------------------------------------------------------------
 
-from Brain_fast_6x6 import *             #<<<<<<<<< This imports the model of a neural network.
 
-dims       = np.array([table_size * table_size, 100, 100, 100, table_size])   #<<<<<<<<< This element refers to the size or topology of the neural network.
+from Brain_fast_6x6 import *       #<<<<<<<<< This imports the model of a neural network.
 
-alpha            = 0.000001               #<<<<<<<<<< This element refers to learning rate.
-epochs           = 400000000              #<<<<<<<<<< This element refers to times of stachostic gradient decent.
+dims             = np.array([table_size * table_size, 100, 100, 100, table_size])  #<<<<<<<<< This element refers to the size or topology of the neural network.
 
-tilt_1           = 30                     #<<<<<<<<< This element refers to the baseline for intial slopes of the activation functions in thehidden and output layers.
-variation_1      = 0.000001               #<<<<<<<<< This element refers to the pertubation of the intial slopes of the activation functions in thehidden and output layers.
-update_rate_1    = 0.000001               #<<<<<<<<< This element refers to learningg rate, identical to alpha.
+tilt_1           = 30         #<<<<<<<<< This element refers to the intial slope for the activation functions in the hidden and output layers.
+variation_1      = 1         #<<<<<<<<< This element refers to the range of randomness of the intial slopes of the activation functions in thehidden and output layers.
+update_rate_1    = 0.000001         #<<<<<<<<< This element refers to learningg rate, identical to alpha.
 
-beta             = 0
-rounds           = 0
+variation_1_     = 1         #<<<<<<<<<< This element refers to range of randomness of the initial weight matrix
+update_rate_1_   = 0.000001         #<<<<<<<<<< This element refers to learning rate, identical to alpha.
+
+epochs           = 100000000         #<<<<<<<<<< This element refers to times of stachostic gradient decent.
 
 tilt_2           = 0
 variation_2      = 0
 update_rate_2    = 0
 
-Machine          = Brain(dims, alpha, epochs, tilt_1, variation_1, update_rate_1, beta, rounds, update_rate_2)
+deviation        = 0
+variation_2_     = 0
+update_rate_2_   = 0
+
+rounds           = 0
+
+mandatory_pulse  = 0
+threshold        = 0.0
+
+Machine          = Brain(dims, tilt_1, variation_1, update_rate_1, variation_1_, update_rate_1, epochs, update_rate_2, update_rate_2_, rounds)
+
 
 #----------------------------------------------------------Training by Model -----------------------------------------------------------------
 
@@ -100,15 +117,16 @@ retrain = False   #<<<<<<<<< This element decides whether to train weight matrix
 
 if retrain == True:
 
-    Machine.synapse_list   = np.load("self.synapse_list_6x6_100x100x100_0.000001_400m_tilt_30.npy")         #<<<<<<<<< This element imports the trained synapses for the neural network.
-    Machine.tilt_1_list    = np.load("self.tilt_1_list_6x6_100x100x100_0.000001_400m_tilt_30.npy")           #<<<<<<<<< This element imports the trained tilt_1 list for the neural network.
+    Machine.synapse_list   = np.load("self.silent_2m_synapse_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m.npy")         #<<<<<<<<< This element imports the trained synapses for the neural network.
+    Machine.tilt_1_list    = np.load("self.silent_2m_tilt_1_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m.npy")           #<<<<<<<<< This element imports the trained tilt_1 list for the neural network.
 Machine.fit(input_list, output_list)
 
 
 #----------------------------------------------------------Saving Synapses -----------------------------------------------------------------
 
-np.save("self.synapse_list_6x6_100x100x100_0.000001_400m_tilt_30"             , Machine.synapse_list        )       #<<<<<<<<< This element exports the trained synapses for the neural network.
-np.save("self.tilt_1_list_6x6_100x100x100_0.000001_400m_tilt_30"               , Machine.tilt_1_list         )       #<<<<<<<<< This element exports the trained tilt_1 list for the neural network.
+
+np.save("self.silent_2m_synapse_list_6x6_100x100x100_30_1_1_0.000001_100m"             , Machine.synapse_list        )       #<<<<<<<<< This element exports the trained synapses for the neural network.
+np.save("self.silent_2m_tilt_1_list_6x6_100x100x100_30_1_1_0.000001_100m"               , Machine.tilt_1_list         )       #<<<<<<<<< This element exports the trained tilt_1 list for the neural network.
 
 
 
