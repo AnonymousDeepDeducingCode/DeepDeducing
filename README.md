@@ -19,8 +19,8 @@
 
 .npy
 
-      self.silent_2m_synapse_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m --- 100x100x100 means the topology of the neural network, tilt_30 means the slope of sigmoid function is set to be 30 and will be updated and fine-tuned, subsequent 0.1 and 0.1 refers to the initial variation for the weight matrix and slopes, subsequent 0.000001 means learning rate, 100m means its been trained for 100 million iterations
-      self.silent_2m_tilt_1_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m  --- tilt_1_list means the tilt list for the sigmoid function in each layer (except input layer) of the neural network
+      self.silent_2m_synapse_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m.npy --- 100x100x100 means the topology of the neural network, tilt_30 means the slope of sigmoid function is set to be 30 and will be updated and fine-tuned, subsequent 0.1 and 0.1 refers to the initial variation for the weight matrix and slopes, subsequent 0.000001 means learning rate, 100m means its been trained for 100 million iterations
+      self.silent_2m_tilt_1_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m.npy  --- tilt_1_list means the tilt list for the sigmoid function in each layer (except input layer) of the neural network
       
 # Others
 The codes are anonymous as well.
