@@ -167,7 +167,7 @@ for form in range(number_of_trails):
     variation_inner  = 0.0001          #<<<<<<<<< This element refers to the range of randomness for the initialized  inner values of the missing numbers.
     update_rate_inner= 0.0001          #<<<<<<<<<< This element refers to deducing rate, identical to beta.
 
-    rounds           = 200000           #<<<<<<<<< This element refers to times of deducing before mandatory pulse takes place.
+    rounds           = 100000           #<<<<<<<<< This element refers to times of deducing before mandatory pulse takes place.
 
     mandatory_pulse  = 35              #<<<<<<<<< This element refers times of mandatory pulse, which is identical to dropped_numbers.
     threshold        = 0.0             #<<<<<<<<< This element determine the threhold which the amax of the inner values of the missing numbers must pass in order to initiate mandatory pulse
