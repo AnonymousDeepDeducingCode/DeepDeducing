@@ -15,7 +15,7 @@ def generate_sudoku_array_one_hot(table_size):
         if random_number != table_size:
             sudoku_matrix_one_hot[i][random_number] = 1
 
-    accept = True                                                                           #<<<<<<<<<<<<<<<<<<<<<<<<<< Silent or not
+    accept = True                                                              
     if np.count_nonzero(sudoku_matrix_one_hot == 1) < table_size:
         accept = False
         for i in range(sudoku_matrix_one_hot.shape[0]):
@@ -55,12 +55,6 @@ def return_value(sudoku_array_one_hot, table_size):
                     returned        = np.zeros(table_size)
                     returned[0:1] = 1
                     return returned
-
-    #for k in range(sudoku_matrix_one_hot.shape[0]):
-    #    if np.amax(sudoku_array_one_hot[k]) == 0:
-    #        returned = np.zeros(table_size)
-    #        returned[0:1] = 1    #<<<<<<<<<<<<<<<<<<<<<<<<<< Strict or smooth
-    #        return returned
 
     returned          = np.ones(table_size)
     return returned
