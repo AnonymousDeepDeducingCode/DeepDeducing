@@ -50,14 +50,14 @@ def generate_sudoku_table(answer_matrix, dropped_numbers):
 #----------------------------------------------------------------------------------------------------------------------------------------------------------
 #-- This function return the inner values matrix for the missing and visible numbers in the Soduku table for the start of deducing
 #----------------------------------------------------------------------------------------------------------------------------------------------------------
-def return_inner(sudoku_matrix, deviation, variation ):
+def return_inner(sudoku_matrix, deviation_inner, variation ):
     shape = sudoku_matrix.shape[0]
     sudoku_matrix_inner = np.zeros((shape ,shape , shape ))
 
     for i in range(sudoku_matrix.shape[0]):
         for j in range(sudoku_matrix.shape[1]):
             if sudoku_matrix[i][j] == 0:
-                array = (np.random.random(shape) - 0.5) * variation  + deviation
+                array = (np.random.random(shape) - 0.5) * variation  + deviation_inner
                 sudoku_matrix_inner[i][j] = array
             else:
                 array = np.zeros(shape) - 15
@@ -98,7 +98,7 @@ def last_check(sudoku_matrix):
 #-- This function is the mandatory pulse function, which finds out the amax of the inner values of the missing numbers, solves a new
 #-- number and re-initializes the rest of the inner values of the missing numbers  after the end of rounds.
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
-def mandatory_pulsed(sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor, tilt_2, variation_2, deviation, variation, wash, threshold):
+def mandatory_pulsed(sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor, tilt_2, variation_2, deviation_inner, variation, wash, threshold):
     if np.count_nonzero(sudoku_matrix_resistor) != 0:
         i, j, k = np.where(sudoku_matrix_inner * tilt_2_list + sudoku_matrix_resistor * 10000000 == np.amax(sudoku_matrix_inner * tilt_2_list + sudoku_matrix_resistor * 10000000))
         i = i[0]
@@ -118,7 +118,7 @@ def mandatory_pulsed(sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor, t
                 for m in range(sudoku_matrix_inner.shape[0]):
                    for n in range(sudoku_matrix_inner.shape[1]):
                        if (sudoku_matrix_resistor[m, n][0] == 1) :
-                           sudoku_matrix_inner[m, n] = sudoku_matrix_inner[m, n] * variation  + deviation
+                           sudoku_matrix_inner[m, n] = sudoku_matrix_inner[m, n] * variation  + deviation_inner
                            tilt_2_list[m, n]         = (np.random.random((sudoku_matrix_inner.shape[2], )) -0.5 ) * variation_2 + tilt_2
 
     return sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor
@@ -154,8 +154,8 @@ for form in range(number_of_trails):
     variation_1      = 0
     update_rate_1    = 0
 
-    variation_1_     = 0
-    update_rate_1_   = 0
+    variation_W     = 0
+    update_rate_W   = 0
 
     epochs           = 0
 
@@ -163,24 +163,24 @@ for form in range(number_of_trails):
     variation_2      = 0.0001          #<<<<<<<<< This element refers to the range of randomness for the intial slopes of the activation functions in the input layer
     update_rate_2    = 0.0001          #<<<<<<<<< This element refers to deducing rate, identical to beta.
 
-    deviation        = -0.10000         #<<<<<<<<< This element refers to the initialized inner values for the missing numbers.
-    variation_2_     = 0.0001          #<<<<<<<<< This element refers to the range of randomness for the initialized  inner values of the missing numbers.
-    update_rate_2_   = 0.0001          #<<<<<<<<<< This element refers to deducing rate, identical to beta.
+    deviation_inner  = -0.10000         #<<<<<<<<< This element refers to the initialized inner values for the missing numbers.
+    variation_inner  = 0.0001          #<<<<<<<<< This element refers to the range of randomness for the initialized  inner values of the missing numbers.
+    update_rate_inner= 0.0001          #<<<<<<<<<< This element refers to deducing rate, identical to beta.
 
-    rounds           = 10000           #<<<<<<<<< This element refers to times of deducing before mandatory pulse takes place.
+    rounds           = 200000           #<<<<<<<<< This element refers to times of deducing before mandatory pulse takes place.
 
     mandatory_pulse  = 35              #<<<<<<<<< This element refers times of mandatory pulse, which is identical to dropped_numbers.
-    wash             = True           #<<<<<<<<< This element determines whether the inner value of the rest of the missing numbers will be reset or not.
     threshold        = 0.0             #<<<<<<<<< This element determine the threhold which the amax of the inner values of the missing numbers must pass in order to initiate mandatory pulse
+    wash             = True           #<<<<<<<<< This element determines whether the inner value of the rest of the missing numbers will be reset or not.
 
-    Machine          = Brain(dims, tilt_1, variation_1, update_rate_1, variation_1_, update_rate_1_, epochs, update_rate_2, update_rate_2_, rounds)
+    Machine          = Brain(dims, tilt_1, variation_1, update_rate_1, variation_W, update_rate_W, epochs, update_rate_2, update_rate_inner, rounds)
 
 
     #----------------------------------------------------------Loading Synapses -----------------------------------------------------------------
 
 
-    model   = "self.silent_2m_synapse_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m.npy" #<<<<<<<<< This element imports the trained synapses for the neural network.
-    tilt_1  = "self.silent_2m_tilt_1_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m.npy"   #<<<<<<<<< This element imports the trained tilt_1 list for the neural network.
+    model   = "self.silent_2m_synapse_list_6x6_100x100x100_30_0.1_0.1_0.000001_200m.npy" #<<<<<<<<< This element imports the trained synapses for the neural network.
+    tilt_1  = "self.silent_2m_tilt_1_list_6x6_100x100x100_30_0.1_0.1_0.000001_200m.npy"   #<<<<<<<<< This element imports the trained tilt_1 list for the neural network.
 
     Machine.synapse_list                       = np.load(model,  allow_pickle=True)
     Machine.tilt_1_list                        = np.load(tilt_1, allow_pickle=True)
@@ -193,7 +193,7 @@ for form in range(number_of_trails):
     #----------------------------------------------------------Deducing by Model -----------------------------------------------------------------
 
 
-    sudoku_matrix_inner    = return_inner(sudoku_matrix, deviation, variation_2_ )
+    sudoku_matrix_inner    = return_inner(sudoku_matrix, deviation_inner, variation_inner )
     sudoku_matrix_resistor = return_resistor(sudoku_matrix)
     tilt_2_list            = (np.random.random((sudoku_matrix_inner.shape[0], sudoku_matrix_inner.shape[1], sudoku_matrix_inner.shape[2])) -0.5 ) * variation_2 + tilt_2
 
@@ -213,7 +213,7 @@ for form in range(number_of_trails):
 
 
         sudoku_matrix_inner, tilt_2_list                           = Machine.deduce_from(sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor, goal)
-        sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor   = mandatory_pulsed(sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor, tilt_2, variation_2, deviation, variation_2_, wash, threshold)
+        sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor   = mandatory_pulsed(sudoku_matrix_inner, tilt_2_list, sudoku_matrix_resistor, tilt_2, variation_2, deviation_inner, variation_inner, wash, threshold)
 
         print("---------------The present numbers solved by machine--------------------")
         machine_matrix = np.zeros((sudoku_matrix_inner.shape[0], sudoku_matrix_inner.shape[1]))

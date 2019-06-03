@@ -86,11 +86,11 @@ from Brain_fast_6x6 import *       #<<<<<<<<< This imports the model of a neural
 dims             = np.array([table_size * table_size, 100, 100, 100, table_size])  #<<<<<<<<< This element refers to the size or topology of the neural network.
 
 tilt_1           = 30         #<<<<<<<<< This element refers to the intial slope for the activation functions in the hidden and output layers.
-variation_1      = 1         #<<<<<<<<< This element refers to the range of randomness of the intial slopes of the activation functions in thehidden and output layers.
-update_rate_1    = 0.000001         #<<<<<<<<< This element refers to learningg rate, identical to alpha.
+variation_1      = 0.0         #<<<<<<<<< This element refers to the range of randomness of the intial slopes of the activation functions in thehidden and output layers.
+update_rate_1    = 0.000000         #<<<<<<<<< This element refers to learningg rate, identical to alpha.
 
-variation_1_     = 1         #<<<<<<<<<< This element refers to range of randomness of the initial weight matrix
-update_rate_1_   = 0.000001         #<<<<<<<<<< This element refers to learning rate, identical to alpha.
+variation_W      = 0.1         #<<<<<<<<<< This element refers to range of randomness of the initial weight matrix
+update_rate_W    = 0.000001         #<<<<<<<<<< This element refers to learning rate, identical to alpha.
 
 epochs           = 100000000         #<<<<<<<<<< This element refers to times of stachostic gradient decent.
 
@@ -98,16 +98,16 @@ tilt_2           = 0
 variation_2      = 0
 update_rate_2    = 0
 
-deviation        = 0
-variation_2_     = 0
-update_rate_2_   = 0
+deviation_inner  = 0
+variation_inner  = 0
+update_rate_inner= 0
 
 rounds           = 0
 
 mandatory_pulse  = 0
 threshold        = 0.0
 
-Machine          = Brain(dims, tilt_1, variation_1, update_rate_1, variation_1_, update_rate_1, epochs, update_rate_2, update_rate_2_, rounds)
+Machine          = Brain(dims, tilt_1, variation_1, update_rate_1, variation_W, update_rate_W, epochs, update_rate_2, update_rate_inner, rounds)
 
 
 #----------------------------------------------------------Training by Model -----------------------------------------------------------------
@@ -117,16 +117,16 @@ retrain = False   #<<<<<<<<< This element decides whether to train weight matrix
 
 if retrain == True:
 
-    Machine.synapse_list   = np.load("self.silent_2m_synapse_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m.npy")         #<<<<<<<<< This element imports the trained synapses for the neural network.
-    Machine.tilt_1_list    = np.load("self.silent_2m_tilt_1_list_6x6_100x100x100_30_0.1_0.1_0.000001_100m.npy")           #<<<<<<<<< This element imports the trained tilt_1 list for the neural network.
+    Machine.synapse_list   = np.load("self.silent_2m_synapse_list_6x6_125x125x125_30_0.1_0.1_0.000001_100m.npy")         #<<<<<<<<< This element imports the trained synapses for the neural network.
+    Machine.tilt_1_list    = np.load("self.silent_2m_tilt_1_list_6x6_125x125x125_30_0.1_0.1_0.000001_100m.npy")           #<<<<<<<<< This element imports the trained tilt_1 list for the neural network.
 Machine.fit(input_list, output_list)
 
 
 #----------------------------------------------------------Saving Synapses -----------------------------------------------------------------
 
 
-np.save("self.silent_2m_synapse_list_6x6_100x100x100_30_1_1_0.000001_100m"             , Machine.synapse_list        )       #<<<<<<<<< This element exports the trained synapses for the neural network.
-np.save("self.silent_2m_tilt_1_list_6x6_100x100x100_30_1_1_0.000001_100m"               , Machine.tilt_1_list         )       #<<<<<<<<< This element exports the trained tilt_1 list for the neural network.
+np.save("self.silent_2m_synapse_list_6x6_100x100x00_30_0_0.1_0.000001_200m"             , Machine.synapse_list        )       #<<<<<<<<< This element exports the trained synapses for the neural network.
+np.save("self.silent_2m_tilt_1_list_6x6_100x100x100_30_0_0.1_0.000001_200m"               , Machine.tilt_1_list         )       #<<<<<<<<< This element exports the trained tilt_1 list for the neural network.
 
 
 

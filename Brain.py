@@ -2,7 +2,7 @@ import numpy as np
 from scipy.special import expit
 
 class Brain(object):
-    def __init__(self, dims, tilt_1, variation_1, update_rate_1, variation_1_, update_rate_1_, epochs, update_rate_2, update_rate_2_, rounds):
+    def __init__(self, dims, tilt_1, variation_1, update_rate_1, variation_W, update_rate_W, epochs, update_rate_2, update_rate_inner, rounds):
 
         self.dims                         = dims
         self.number_of_layers             = self.dims.shape[0]
@@ -11,14 +11,14 @@ class Brain(object):
         self.variation_1                  = variation_1
         self.update_rate_1                = update_rate_1
 
-        self.variation_1_                 = variation_1_
-        self.update_rate_1_               = update_rate_1_
+        self.variation_W                  = variation_W
+        self.update_rate_W                = update_rate_W
 
         self.epochs                       = epochs
 
         self.update_rate_2                = update_rate_2
 
-        self.update_rate_2_               = update_rate_2_
+        self.update_rate_inner            = update_rate_inner
 
         self.rounds                       = rounds
 
@@ -30,7 +30,7 @@ class Brain(object):
     def initialize_weights(self):
         synapse_list = list()
         for i in range(self.number_of_layers - 1):
-            synapse                                              = (np.random.random((self.dims[i]                                 , self.dims[i+1]                          )) -0.5 ) * self.variation_1_
+            synapse                                              = (np.random.random((self.dims[i]                                 , self.dims[i+1]                          )) -0.5 ) * self.variation_W
             synapse_list.append(synapse)
         synapse_list = np.asarray(synapse_list)
         return  synapse_list
@@ -99,7 +99,7 @@ class Brain(object):
 
         for i in range(self.number_of_layers - 1):
 
-            self.synapse_list[i]                            += np.atleast_2d(layer_list[i]                                                          ).T.dot(np.array(layer_delta_list[- 1 - i])                            ) * self.update_rate_1_
+            self.synapse_list[i]                            += np.atleast_2d(layer_list[i]                                                          ).T.dot(np.array(layer_delta_list[- 1 - i])                            ) * self.update_rate_W
             self.tilt_1_list[i]                             += np.array(tilt_1_delta_list[- 1 - i])                                                                                                                          * self.update_rate_1
 
 
@@ -159,12 +159,12 @@ class Brain(object):
         layer_delta_list.append(layer_delta)
 
         if position == "row":
-            self.sodoku_matrix_inner[index, :] += (np.array(layer_delta_list[-1][0]) * self.update_rate_2_* self.sodoku_matrix_resistor[index, :].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
-            self.tilt_2_list[index, :]         += (np.array(tilt_2_delta)            * self.update_rate_2 * self.sodoku_matrix_resistor[index, :].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
+            self.sodoku_matrix_inner[index, :] += (np.array(layer_delta_list[-1][0]) * self.update_rate_inner * self.sodoku_matrix_resistor[index, :].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
+            self.tilt_2_list[index, :]         += (np.array(tilt_2_delta)            * self.update_rate_2     * self.sodoku_matrix_resistor[index, :].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
 
         if position == "column":
-            self.sodoku_matrix_inner[:, index] += (np.array(layer_delta_list[-1][0]) * self.update_rate_2_* self.sodoku_matrix_resistor[:, index].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
-            self.tilt_2_list[:, index]         += (np.array(tilt_2_delta)            * self.update_rate_2 * self.sodoku_matrix_resistor[:, index].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
+            self.sodoku_matrix_inner[:, index] += (np.array(layer_delta_list[-1][0]) * self.update_rate_inner * self.sodoku_matrix_resistor[:, index].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
+            self.tilt_2_list[:, index]         += (np.array(tilt_2_delta)            * self.update_rate_2     * self.sodoku_matrix_resistor[:, index].flatten()   ).reshape((self.sodoku_size, self.sodoku_size))
 
 
     def deduce_from(self, sodoku_matrix_inner, tilt_2_list, sodoku_matrix_resistor, goal):
