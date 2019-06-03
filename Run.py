@@ -154,8 +154,8 @@ for form in range(number_of_trails):
     variation_1      = 0
     update_rate_1    = 0
 
-    variation_W     = 0
-    update_rate_W   = 0
+    variation_W      = 0
+    update_rate_W    = 0
 
     epochs           = 0
 
@@ -163,15 +163,15 @@ for form in range(number_of_trails):
     variation_2      = 0.0001          #<<<<<<<<< This element refers to the range of randomness for the intial slopes of the activation functions in the input layer
     update_rate_2    = 0.0001          #<<<<<<<<< This element refers to deducing rate, identical to beta.
 
-    deviation_inner  = -0.10000         #<<<<<<<<< This element refers to the initialized inner values for the missing numbers.
+    deviation_inner  = -0.10000        #<<<<<<<<< This element refers to the initialized inner values for the missing numbers.
     variation_inner  = 0.0001          #<<<<<<<<< This element refers to the range of randomness for the initialized  inner values of the missing numbers.
     update_rate_inner= 0.0001          #<<<<<<<<<< This element refers to deducing rate, identical to beta.
 
-    rounds           = 100000           #<<<<<<<<< This element refers to times of deducing before mandatory pulse takes place.
+    rounds           = 100000          #<<<<<<<<< This element refers to times of deducing before mandatory pulse takes place.
 
     mandatory_pulse  = 35              #<<<<<<<<< This element refers times of mandatory pulse, which is identical to dropped_numbers.
     threshold        = 0.0             #<<<<<<<<< This element determine the threhold which the amax of the inner values of the missing numbers must pass in order to initiate mandatory pulse
-    wash             = True           #<<<<<<<<< This element determines whether the inner value of the rest of the missing numbers will be reset or not.
+    wash             = True            #<<<<<<<<< This element determines whether the inner value of the rest of the missing numbers will be reset or not.
 
     Machine          = Brain(dims, tilt_1, variation_1, update_rate_1, variation_W, update_rate_W, epochs, update_rate_2, update_rate_inner, rounds)
 
