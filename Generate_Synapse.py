@@ -22,7 +22,7 @@ def generate_sudoku_array_one_hot(table_size):
             for j in range(sudoku_matrix_one_hot.shape[0]):
                 if i != j:
                     if (np.amax(sudoku_matrix_one_hot[i]) == 1) & (np.amax(sudoku_matrix_one_hot[j]) == 1) & (np.argmax(sudoku_matrix_one_hot[i]) == np.argmax(sudoku_matrix_one_hot[j])):
-                        accept == True
+                        accept = True
 
     while accept == False:
         sudoku_matrix_one_hot = np.zeros((table_size, table_size))
@@ -38,7 +38,7 @@ def generate_sudoku_array_one_hot(table_size):
                 for j in range(sudoku_matrix_one_hot.shape[0]):
                     if i != j:
                         if (np.amax(sudoku_matrix_one_hot[i]) == 1) & (np.amax(sudoku_matrix_one_hot[j]) == 1) & (np.argmax(sudoku_matrix_one_hot[i]) == np.argmax(sudoku_matrix_one_hot[j])):
-                            accept == True
+                            accept = True
 
     return sudoku_matrix_one_hot.flatten()
 
